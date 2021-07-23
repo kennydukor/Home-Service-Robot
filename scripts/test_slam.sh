@@ -24,4 +24,4 @@ sleep 5
 # Launch teleops for navigation
 xterm  -e  "cd $(pwd)/../..;
 source devel/setup.bash;
-roslaunch turtlebot_teleop keyboard_teleop.launch" &
+roslaunch turtlebot_teleop keyboard_teleop.launch"

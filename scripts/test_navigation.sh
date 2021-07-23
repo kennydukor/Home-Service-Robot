@@ -17,4 +17,4 @@ sleep 5
 # Launch rviz for visualization
 xterm  -e  "cd $(pwd)/../..;
 source devel/setup.bash;
-roslaunch turtlebot_rviz_launchers view_navigation.launch" &
+roslaunch turtlebot_rviz_launchers view_navigation.launch"
