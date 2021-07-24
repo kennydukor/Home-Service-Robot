@@ -35,40 +35,40 @@ Within your `home` directory, execute the following:
 
 ```
 mkdir -p catkin_ws/src
-cd catkin_ws/src
-catkin_init_workspace
+$ cd catkin_ws/src
+$ catkin_init_workspace
 ```
 
 Within `~/catkin_ws/src/` download or clone folders of this repository:
 
 ```
-cd catkin_ws/src/
-git clone https://github.com/kennydukor/Home-Service-Robot.git
+$ cd catkin_ws/src/
+$ git clone https://github.com/kennydukor/Home-Service-Robot.git
 ```
 
 Install dependencies:
 
 ```
-rosdep -i install gmapping -y
-rosdep -i install turtlebot_teleop -y
-rosdep -i install turtlebot_rviz_launchers -y
-rosdep -i install turtlebot_gazebo -y
+$ rosdep -i install gmapping -y
+$ rosdep -i install turtlebot_teleop -y
+$ rosdep -i install turtlebot_rviz_launchers -y
+$ rosdep -i install turtlebot_gazebo -y
 ```
 
 `NOTE`: If any of the official packages give error, I recommed you delete associated folder and clone with src folder using appropriate line from here:
 
 ```
-git clone https://github.com/ros-perception/slam_gmapping.git  
-git clone https://github.com/turtlebot/turtlebot.git  
-git clone https://github.com/turtlebot/turtlebot_interactions.git  
-git clone https://github.com/turtlebot/turtlebot_simulator.git
+$ git clone https://github.com/ros-perception/slam_gmapping.git  
+$ git clone https://github.com/turtlebot/turtlebot.git  
+$ git clone https://github.com/turtlebot/turtlebot_interactions.git  
+$ git clone https://github.com/turtlebot/turtlebot_simulator.git
 ```
 
 Go back to catkin workspace and build it
 
 ```
-cd catkin_ws/
-catkin_make
+$ cd catkin_ws/
+$ catkin_make
 ```
 
 ### Launch specific application and visualize
