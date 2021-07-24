@@ -13,18 +13,18 @@ xterm  -e  "cd $(pwd)/../..;
 source devel/setup.bash;
 roslaunch turtlebot_gazebo amcl_demo.launch map_file:=$(pwd)/../map/robot_world_map.yaml" & 
 
-sleep 5
+sleep 10
 
 # Launch rviz for visualization
 xterm  -e  "cd $(pwd)/../..;
 source devel/setup.bash;
 roslaunch turtlebot_rviz_launchers view_navigation.launch" &
 
-sleep 5
+sleep 10
 
 # Launch add_marker node
 # I didnt use virtual_loc_config.yaml
 xterm -e "cd $(pwd)/../..;
 source devel/setup.bash;
 rosparam load $(pwd)/../config/virtual_loc_config.yaml;
-rosrun add_makers add_markers"
+rosrun add_makers add_virtual_markers"

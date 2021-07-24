@@ -34,9 +34,6 @@ int main(int argc, char** argv){
   // pick-up action
   move_base_msgs::MoveBaseGoal goal;		
 
-  // goal reach status
-  //std_msgs::UInt8 status_msg;  
-
   // set up the frame parameters
   // pick-goal setup
   goal.target_pose.header.frame_id = "map";
