@@ -25,7 +25,6 @@ The goal of this project was to design a robot's environment in gazebo and progr
 	* [turtlebot_teleop](http://wiki.ros.org/turtlebot_teleop)
 	* [turtlebot_rviz_launchers](http://wiki.ros.org/turtlebot_rviz_launchers)
 	* [turtlebot_gazebo](http://wiki.ros.org/turtlebot_gazebo)
-	* 
 
 ### Clone and Build
 
@@ -80,7 +79,7 @@ From the `catkin_ws/` directory run the following commands:
 ``` bash
 $ ./src/script/test_slam.sh
 ```  
-<p align="center"><img src="./screenshots/image_1.gif"></p>
+<p align="center"><img src="screenshots/slam_5.gif"></p>
 
 #### Testing Navigation
 
