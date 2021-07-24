@@ -86,25 +86,25 @@ $ ./src/script/test_slam.sh
 ``` bash
 $ ./src/script/test_navigation.sh
 ```  
-<p align="center"><img src="./screenshots/image_1.gif"></p> 
+<p align="center"><img src="screenshots/nav_5.gif"></p> 
 
 #### Pick_objects
 
 ``` bash
 $ ./src/script/pick_objects.sh
 ```  
-<p align="center"><img src="./screenshots/image_1.gif"></p> 
+<p align="center"><img src="screenshots/pick_5.gif"></p> 
 
 #### Add Markers
 
 ``` bash
 $ ./src/script/add_marker.sh
 ```  
-<p align="center"><img src="./screenshots/image_1.gif"></p>
+<p align="center"><img src="screenshots/marker_5.gif"></p>
 
 #### Home Service
 
 ```bash
 $ ./src/script/home_service.sh
 ```
-<p align="center"><img src="./screenshots/image_1.gif"></p>
+<p align="center"><img src="screenshots/home_5.gif"></p>
