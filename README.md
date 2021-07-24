@@ -1,6 +1,6 @@
 # Home-Service-Robot
 
-Final project for Udacity's Robotics Software Engineer Nanodegree Program
+Udacity Robotics Software Engineer Nanodegree Program [Project 5]
 
 <p align="center"><img src="./images/vid_homeservice_rviz_window.gif"></p>
 
@@ -28,79 +28,7 @@ The goal of this project was to design a robot's environment in gazebo and progr
 	* [turtlebot_teleop](http://wiki.ros.org/turtlebot_teleop)
 	* [turtlebot_rviz_launchers](http://wiki.ros.org/turtlebot_rviz_launchers)
 	* [turtlebot_gazebo](http://wiki.ros.org/turtlebot_gazebo)
-
-### Directory Tree and contents
-
-```
-.
-├── README.md
-├── images
-│   ├── ... ...
-├── CMakeLists.txt
-├── add_markers
-│   ├── launch
-│   │   └── home_service_rviz_config.launch
-│   └── src
-│       ├── add_markers.cpp
-│       └── add_markers_test.cpp
-│   ├──  ... ...
-├── config
-│   └── marker_config.yaml
-├── map
-│   ├── building
-│   │   ├── ... ...
-│   ├── home_service.world
-│   ├── home_service_map.pgm
-│   ├── home_service_map.yaml
-├── pick_objects
-│   └── src
-│       ├── pick_objects.cpp
-│       └── pick_objects_test.cpp
-│   ├──  ... ...
-├── rvizConfig
-│   └── home_service.rviz
-├── scripts
-│   ├── add_marker.sh
-│   ├── home_service.sh
-│   ├── pick_objects.sh
-│   ├── test_navigation.sh
-│   └── test_slam.sh
-├── slam_gmapping
-│   ├── gmapping
-│   |── ... ...
-├── turtlebot
-│   |── turtlebot_teleop
-│   |── ... ...
-├── turtlebot_interactions
-│   |── turtlebot_rviz_launchers
-│   |── ... ...
-|── turtlebot_simulator
-│   ├── turtlebot_gazebo
-│   |── ... ...
-
-```
-
-This directory represents the main project's `src` folder structure with following contents
-
-* README.md: this file.
-* **images** - folder with images and videos for this report
-* **add_markers** - add marker C++ node
-* **config** - folder with configuration file to specify pick-up and drop-off locations
-* **map** - map and gazebo world files
-* **pick_objects** - pick-objects C++ node
-* **rvizConfig** - folder with rViz configurations used with some launch scripts
-* **scripts** - shell scripts
-	* `add_marker.sh` - script for testing add_marker concept with `add_markers_test.cpp`
-	* `home_service.sh` - main script for the home-service-robot
-	* `pick_objects.sh` - script for testing pick_objects concept with `pick_objects_test`
-	* `test_navigation.sh` - script for testing navigation
-	* `test_slam.sh` - script for performing SLAM and preparing map
-* **slam_gmapping** - official ROS package with `gmapping_demo.launch` file
-* **turtlebot** - official ROS package with `keyboard_teleop.launch` file
-* **turtlebot_interactions** - official ROS package with `view_navigation.launch` file
-* **turtlebot_simulator** - official ROS package with `turtlebot_world.launch` file
-
----
+	* 
 
 ### Clone and Build
 
@@ -117,8 +45,8 @@ catkin_init_workspace
 Within `~/catkin_ws/src/` download or clone folders of this repository:
 
 ```
-cd ~/catkin_ws/src/
-git clone https://github.com/viks8dm/home-service-robot.git
+cd catkin_ws/src/
+git clone https://github.com/kennydukor/Home-Service-Robot.git
 ```
 
 Install dependencies:
@@ -142,7 +70,7 @@ git clone https://github.com/turtlebot/turtlebot_simulator.git
 Go back to catkin workspace and build it
 
 ```
-cd ~/catkin_ws/
+cd catkin_ws/
 catkin_make
 ```
 
