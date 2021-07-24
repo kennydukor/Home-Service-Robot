@@ -3,6 +3,7 @@
 # Launch turtlebot in my custom world
 xterm  -e  "cd $(pwd)/../..;
 source devel/setup.bash;
+export ROBOT_INITIAL_POSE='-x 0.171998 -y 0.682663 -z -0.000247 -R 0.000778 -P -0.014417 -Y 1.603426';
 roslaunch turtlebot_gazebo turtlebot_world.launch world_file:=$(pwd)/../map/robot_world.world" &
 
 sleep 10
@@ -18,3 +19,5 @@ sleep 5
 xterm  -e  "cd $(pwd)/../..;
 source devel/setup.bash;
 roslaunch turtlebot_rviz_launchers view_navigation.launch"
+
+#export ROBOT_INITIAL_POSE='-x 0.171998 -y 0.682663 -z -0.000247 -R 0.000778 -P -0.014417 -Y 1.603426'

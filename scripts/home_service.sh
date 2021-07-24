@@ -22,6 +22,15 @@ roslaunch turtlebot_rviz_launchers view_navigation.launch" &
 
 sleep 5
 
+# Launch add_marker node
+# I didnt use virtual_loc_config.yaml
+xterm -e "cd $(pwd)/../..;
+source devel/setup.bash;
+rosparam load $(pwd)/../config/virtual_loc_config.yaml;
+rosrun add_makers add_markers" &
+
+sleep 5
+
 # Launch pick_objects node
 # I didnt use virtual_loc_config.yaml
 xterm -e "cd $(pwd)/../..;

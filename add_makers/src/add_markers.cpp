@@ -1,41 +1,37 @@
 #include <ros/ros.h>
 #include <visualization_msgs/Marker.h>
 #include <std_msgs/UInt8.h>
+#include <std_msgs/Int32.h>
 
-// bool marker_reach_state = false;
-uint8_t goal_reach_state = 0;
+int goal_stage;
+std_msgs::Int32 success;
 
 /* robot goal proximity callback function */
-void goalReachCallback(const std_msgs::UInt8::ConstPtr& msg)
+void goal_callback_func(const std_msgs::Int32 msg)
 {
-   goal_reach_state = msg->data;
-   return;
+  goal_stage = msg.data;
+  return;
 }
 
 /* main function */
 int main( int argc, char** argv )
 {
-  ros::init(argc, argv, "add_markers");
+	ros::init(argc, argv, "add_markers");
+	ros::NodeHandle n;
+	ros::Rate r(1);
+	ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+	ros::Subscriber odom_sub = n.subscribe("/goal_status", 10, goal_callback_func);
+	ros::Publisher success_pub = n.advertise<std_msgs::Int32>("/message_pickup", 10);
 
-  ros::NodeHandle n;
-  ros::Rate r(4);
-  ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+	// Set our initial shape type to be a cube
+	int shape = visualization_msgs::Marker::CUBE;
 
-  ros::Subscriber odom_sub = n.subscribe("/goal_reached", 1, goalReachCallback);
-  bool done = false;
-
-  // Set our initial shape type to be a cube
-  uint32_t shape = visualization_msgs::Marker::CUBE;
-
-  ROS_INFO("Subscribed to desired goal-position");
-
+	ROS_INFO("Subscribed to desired goal-position");
   while (ros::ok()) {
-    //Do this every cycle to ensure the subscriber receives the message
-    ros::spinOnce();
-
     visualization_msgs::Marker marker;
+
     // Set the frame ID and timestamp.  See the TF tutorials for information on these.
-    marker.header.frame_id = "/map";
+    marker.header.frame_id = "map";
     marker.header.stamp = ros::Time::now();
 
     // Set the namespace and id for this marker.  This serves to create a unique ID
@@ -43,12 +39,22 @@ int main( int argc, char** argv )
     marker.ns = "add_markers";
     marker.id = 0;
 
-    // Set the marker type.  Initially this is CUBE, and cycles between that and SPHERE, ARROW, and CYLINDER
+    // Set the marker type. 
     marker.type = shape;
+
+    // marker inital pose setup
+    marker.pose.position.x = 0;
+    marker.pose.position.y = 0;
+    marker.pose.position.z = 0;
+    marker.pose.orientation.x = 0.0;
+    marker.pose.orientation.y = 0.0;
+    marker.pose.orientation.z = 0.0;
+    marker.pose.orientation.w = 1.0;
+
     // Set the scale of the marker -- 1x1x1 here means 1m on a side
-    marker.scale.x = 0.5;
-    marker.scale.y = 0.5;
-    marker.scale.z = 0.5;
+    marker.scale.x = 0.3;
+    marker.scale.y = 0.3;
+    marker.scale.z = 0.3;
     // threshold = marker.scale.x;
 
     // Set the color -- be sure to set alpha to something non-zero!
@@ -57,57 +63,49 @@ int main( int argc, char** argv )
     marker.color.b = 1.0f;
     marker.color.a = 1.0;
 
-    switch (goal_reach_state)
+    marker.lifetime = ros::Duration();
+
+    switch (goal_stage)
     {
-      case 0: // publish pick-up marker
+      // publish pick-up marker
+      case 0:
         {
-          //ROS_INFO("publishing PICK-UP marker");
           // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
+          // Show marker until robot reach location (info is gotten from /goal_status)
           marker.action = visualization_msgs::Marker::ADD;
-          // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
-          n.getParam("/pick_up_loc/tx", marker.pose.position.x);
-          n.getParam("/pick_up_loc/ty", marker.pose.position.y);
-          n.getParam("/pick_up_loc/tz", marker.pose.position.z);
-          n.getParam("/pick_up_loc/qx", marker.pose.orientation.x);
-          n.getParam("/pick_up_loc/qy", marker.pose.orientation.y);
-          n.getParam("/pick_up_loc/qz", marker.pose.orientation.z);
-          n.getParam("/pick_up_loc/qw", marker.pose.orientation.w);
+  	      marker.pose.position.x = 1;
+  	      marker.pose.position.y = 0;
+  	      marker.pose.orientation.w = 1;
+          marker.lifetime = ros::Duration();
+          ROS_INFO("Robot moving to marker for pickup");
           break;
-        } // case 0
-
-        case 1:   // robot reach pickup site, delete pick-up marker
+        } 
+        case 1:
           {
+            // Remove marker to simulate pickup 
             sleep(2);
-            //ROS_INFO("hiding PICK-UP marker");
+            ROS_INFO_ONCE("Marker reached and picked-up");
             marker.action = visualization_msgs::Marker::DELETE;
-            break;
-          } // case 1
-
-        case 2: // wait for robot to reach drop-off site
-          {
-            marker.action = visualization_msgs::Marker::DELETE;
+            ROS_INFO("Robot moving to drop-off location");
             break;
           }
 
-        case 3:   // publish drop-off marker
+        case 2: 
           {
+            // Show marker to simulate drop-off
             sleep(5);
-            //ROS_INFO("adding drop-off marker");
+            ROS_INFO("Drop off location reached and marker dropped");
             // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
             marker.action = visualization_msgs::Marker::ADD;
-            // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
-            n.getParam("/drop_off_loc/tx", marker.pose.position.x);
-            n.getParam("/drop_off_loc/ty", marker.pose.position.y);
-            n.getParam("/drop_off_loc/tz", marker.pose.position.z);
-            n.getParam("/drop_off_loc/qx", marker.pose.orientation.x);
-            n.getParam("/drop_off_loc/qy", marker.pose.orientation.y);
-            n.getParam("/drop_off_loc/qz", marker.pose.orientation.z);
-            n.getParam("/drop_off_loc/qw", marker.pose.orientation.w);
-            done = true;
+            marker.pose.position.x = 0;
+            marker.pose.position.y = 2;
+            marker.pose.orientation.w = 1;
+            marker.lifetime = ros::Duration();
+            success.data = 1;
+            success_pub.publish(success);
             break;
           }
-
-    } // switch
+    }
 
     // Publish the marker
     while (marker_pub.getNumSubscribers() < 1)
@@ -119,19 +117,12 @@ int main( int argc, char** argv )
       ROS_WARN_ONCE("Please create a subscriber to the marker");
       sleep(1);
     }
-
-    //publish the marker
     marker_pub.publish(marker);
 
-    // if last marker published and noted as done exit
-    if (done) {
-      ROS_INFO("=== DESTINATION Reached ===");
-      sleep(7);
-      return 0;
-      }
+    //Ensure subscriber receives the message
+    ros::spinOnce();
 
     r.sleep();
-  } // while ros-ok
+  } 
 
-  return 0;
-} // main
+}
