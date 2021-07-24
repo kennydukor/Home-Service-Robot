@@ -76,10 +76,12 @@ catkin_make
 From the `catkin_ws/` directory run the following commands:  
 
 #### Testing SLAM
+
 ``` bash
 $ ./src/script/test_slam.sh
 ```  
 <p align="center"><img src="./screenshots/image_1.gif"></p>
+
 #### Testing Navigation
 ``` bash
 $ ./src/script/test_navigation.sh
