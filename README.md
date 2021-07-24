@@ -2,9 +2,6 @@
 
 Udacity Robotics Software Engineer Nanodegree Program [Project 5]
 
-<p align="center"><img src="./images/vid_homeservice_rviz_window.gif"></p>
-
-
 
 **Project Goals**
 
@@ -76,102 +73,31 @@ catkin_make
 
 ### Launch specific application and visualize
 
-Specific applications can be launched using scripts provided. In this section I will go over how I have used these scripts.
+From the `catkin_ws/` directory run the following commands:  
 
-##### Gazebo-world, SLAM test & map-creation
+#### Testing SLAM
+``` bash
+$ ./src/script/test_slam.sh
+```  
+<p align="center"><img src="./screenshots/image_1.gif"></p>
+#### Testing Navigation
+``` bash
+$ ./src/script/test_navigation.sh
+```  
+<p align="center"><img src="./screenshots/image_1.gif"></p> 
+#### Pick_objects
+``` bash
+$ ./src/script/pick_objects.sh
+```  
+<p align="center"><img src="./screenshots/image_1.gif"></p> 
 
-For my world file I started with the gazebo-world I have used in past (like the one in https://github.com/viks8dm/mapping_ROS). However, during SLAM and map preparation I realized that this world had following flaws:
-
-* it has very few features and a lot of open space. This leads to `gmapping` error with following messages:
-	* `Scan Matching Failed, using odometry. Likelihood=0`
-* There were two carts in the model which were not fixed. So while the robot completed a loop and came back to a spot near one of the carts, the mapping algorithm was getting confused and resulting in image rotation in rviz, similar to that shown below.
-
-
-![gmapping_error](./images/gmapping_error.jpg)
-
-*Fig.1: gmapping-error sample*
-
-Hence I added features to the world and updated it to that shown here:
-
-![world](./images/gazebo_image.jpg)
-*Fig.2: home-service-world*
-
-For SLAM-test go to `src/scripts` folder and run `test_slam.sh` script:
-
+#### Add Markers
+``` bash
+$ ./src/script/add_marker.sh
+```  
+<p align="center"><img src="./screenshots/image_1.gif"></p>
+#### Home Service
+```bash
+$ ./src/script/home_service.sh
 ```
-cd ~/catkin_ws/src/scripts
-./test_slam.sh
-```
-
-This will launch:
-
-* `turtlebot_world.launch` to deploy turtlebot in my world with specific pose
-* `gmapping_demo.launch` to perform SLAM
-* `view_navigation.launch` to observe map in rviz
-* `keyboard_teleop.launch` to manually control robot
-
-After navigating the robot around multiple times, once I was satisfied with the map appearance in comparison to the world-file, I saved it using:
-
-`rosrun map_server map_saver -f <map-location-and-name>`
-
-The corresponding map looks as follows:
-
-![saved_map](./images/saved_map.jpg)
-*Fig.3: saved-map*
-
-##### Localization and navigation test
-
-For localization testing, I used `test_localization.sh` as follows:
-
-```
-cd ~/catkin_ws/src/scripts
-./test_localization.sh
-```
-
-This will launch:
-
-* `turtlebot_world.launch` to deploy turtlebot in my world with specific pose
-* `amcl_demo.launch` to localize turtlebot
-* `view_navigation.launch` to observe map in rviz
-
-I used `2D Nav` tab in rviz to manually point out to two different goals, one at a time, and direct the robot to reach them and orient itself with respect to them. A sample image is shown below and the sample video can be found [here](https://youtu.be/DN2bRCeoVyI)
-
-![nav_sample](./images/nav_sample.jpg)
-*Fig.4: navigation-test sample*
-
-##### Navigation Goal Node (pick-objects)
-
-To test robot's capability to reach multiple goals, as specified by the program (and not manually), I created pick_objects package and specifically `pick_objects_test.cpp` function. This can be tested following script which launches turtlebot, AMCL, rviz and pick_objects node:
-
-```
-cd ~/catkin_ws/src/scripts
-./pick_objects.sh
-```
-
-##### Virtual Objects Node (add-markers)
-
-To model a virtual object with markers in rviz, I created add_markers package and specifically `add_markers_test.cpp` function. This can be tested following script which launches turtlebot, AMCL, rviz and add_markers node:
-
-```
-cd ~/catkin_ws/src/scripts
-./add_markers.sh
-```
-A sampe output is shown here:
-
-![marker_test](./images/add_marker_test.jpg)
-*Fig.5: virtual object addition test*
-
-
-##### Home-Service-Robot package
-
-To simulate a full home service robot capable of navigating to pick up and deliver virtual objects, communication was established between the add_markers and pick_objects nodes via a `"/goal_reached"` topic. For this purpose modified versions of previous test codes were created respectively `pick_objects.cpp` and `add_markers.cpp`. The entire package can be launched using:
-
-```
-cd ~/catkin_ws/src/scripts
-./home_service.sh
-```
-
-The result can be seen in the gif display above or at one of these video links:
-
-* home-service-robot's rviz window: https://youtu.be/iy3RJXRyFkw
-* home-service-robot's rviz with messages: https://youtu.be/mAXX1b7Ap_k
+<p align="center"><img src="./screenshots/image_1.gif"></p>
