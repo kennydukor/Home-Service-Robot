@@ -3,12 +3,11 @@
 Udacity Robotics Software Engineer Nanodegree Program [Project 5]
 
 **Related Projects**
-
-**Project Goals**
 * [Map My World (SLAM)](https://github.com/kennydukor/Map-My-World)
 * [Where am I](https://github.com/kennydukor/Where-Am-I)
 * [Go chase it](https://github.com/kennydukor/GO-CHASE-IT)
 
+**Project Goals**
 
 The goal of this project was to design a robot's environment in gazebo and program the home-service robot that will map it's environment and autonomously navigate to pre-specified pickup and drop-off locations. For this one needed to:
 
