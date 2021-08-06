@@ -21,8 +21,8 @@ The goal of this project was to design a robot's environment in gazebo and progr
 ### Prerequisites
 (since I have not tested on multiple platforms, and versions, I am listing only the configuration I used)
 
-* Ubuntu 16.04 OS with default make (>=4.1) and g++/gcc (>=5.4) packages
-* Gazebo >= 7.0
+* Ubuntu 16.04 OS with default make `(>=4.1)` and `g++/gcc (>=5.4)` packages
+* `Gazebo >= 7.0`
 * ROS Kinetic
 * following ROS packages were used and the process of obtaining them is detailed below:
 	* [gmapping](http://wiki.ros.org/gmapping)
