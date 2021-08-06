@@ -4,7 +4,7 @@ Udacity Robotics Software Engineer Nanodegree Program [Project 5]
 
 **Related Projects**
 * [Map My World (SLAM)](https://github.com/kennydukor/Map-My-World)
-* [Where am I](https://github.com/kennydukor/Where-Am-I)
+* [Where am I (Monte Carlo Localization)](https://github.com/kennydukor/Where-Am-I)
 * [Go chase it](https://github.com/kennydukor/GO-CHASE-IT)
 
 **Project Goals**
